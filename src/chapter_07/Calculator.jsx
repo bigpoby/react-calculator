@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import InputBox from "./InputBox";
 import Result from "./Result";
+import CalcPad from "./CalcPad";
 
 export default function Calculator() {
     const [number1, setNumber1] = useState(0);
@@ -19,10 +20,7 @@ export default function Calculator() {
 
     return (
         <div>
-            <InputBox value={number1} handleChange={handleChange1} ref={inputRef}/>
-            <InputBox value={number2} handleChange={handleChange2} />
-            <button onClick={focusInput}>첫번째 입력에 포커스</button>
-            <Result val1={number1} val2={number2}/>
+            <CalcPad />
         </div>
     )
 }
