@@ -1,10 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import InputBox from "./InputBox";
 import Result from "./Result";
 
 export default function Calculator() {
     const [number1, setNumber1] = useState(0);
     const [number2, setNumber2] = useState(0);
+    const inputRef = useRef(null);
 
     // useCallback적용
     // 의존성 목록이 비어 있으면 최초 한 번만 함수를 반환
@@ -12,11 +13,15 @@ export default function Calculator() {
     const handleChange1 = useCallback((e) => setNumber1(Number(e.target.value)), []);
     const handleChange2 = useCallback((e) => setNumber2(Number(e.target.value)), []);
 
+    const focusInput = () => {
+      inputRef.current.focus();
+    }
+
     return (
         <div>
-            <InputBox value={number1} handleChange={handleChange1} />
+            <InputBox value={number1} handleChange={handleChange1} ref={inputRef}/>
             <InputBox value={number2} handleChange={handleChange2} />
-            <button>첫번째 입력에 포커스</button>
+            <button onClick={focusInput}>첫번째 입력에 포커스</button>
             <Result val1={number1} val2={number2}/>
         </div>
     )
